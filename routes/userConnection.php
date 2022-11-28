@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/suggestions', [App\Http\Controllers\UserConnectionsController::class, 'index'])->name('suggestions');
 Route::post('/createrequest', [App\Http\Controllers\UserConnectionsController::class, 'store'])->name('createRequest');
+Route::post('/acceptrequest', [App\Http\Controllers\UserConnectionsController::class, 'store'])->name('acceptRequest');
 Route::post('/sentrequests', [App\Http\Controllers\UserConnectionsController::class, 'index'])->name('sentRequests');
 Route::post('/recievedrequests', [App\Http\Controllers\UserConnectionsController::class, 'index'])->name('recievedRequests');
+Route::post('/acceptedrequests', [App\Http\Controllers\UserConnectionsController::class, 'index'])->name('acceptedRequests');
 Route::post('/deleterequest', [App\Http\Controllers\UserConnectionsController::class, 'destroy'])->name('deleteRequest');

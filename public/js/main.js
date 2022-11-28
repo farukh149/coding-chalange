@@ -17,8 +17,8 @@ function getMoreRequests(mode) {
   // your code here...
 }
 
-function getConnections() {
-  // your code here...
+function getConnections(mode) {
+  ajax('/acceptedrequests', 'POST', '', {type:mode});
 }
 
 function getMoreConnections() {
@@ -44,16 +44,16 @@ function getMoreSuggestions() {
   // your code here...
 }
 
-function sendRequest(userId, suggestionId) {
-  ajax('/createrequest', 'POST', '', {userId:userId,suggestionId:suggestionId});
+function sendRequest(userId, suggestionId,$mode) {
+  ajax('/createrequest', 'POST', '', {userId:userId,suggestionId:suggestionId,mode:$mode});
 }
 
 function deleteRequest(userId, requestId) {
   ajax('/deleterequest', 'POST', '', {userId:userId,requestId:requestId});
 }
 
-function acceptRequest(userId, requestId) {
-  // your code here...
+function acceptRequest(userId, requestId,$mode) {
+  ajax('/acceptrequest', 'POST', '', {userId:userId,requestId:requestId,mode:$mode});
 }
 
 function removeConnection(userId, connectionId) {

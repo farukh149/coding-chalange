@@ -16,7 +16,7 @@
     </div>
   @endforeach
 @else
-@foreach($recievedConnections->recievedRequests as $request)
+@foreach($recievedConnections as $request)
     <div class="my-2 shadow text-white bg-dark p-1" id="">
       <div class="d-flex justify-content-between">
         <table class="ms-1">
@@ -27,7 +27,7 @@
         </table>
         <div>
             <button id="accept_request_btn_" class="btn btn-primary me-1"
-              onclick="">Accept</button>
+              onclick="acceptRequest('{{auth()->user()->id}}','{{$request->id}}','accepted')">Accept</button>
         </div>
       </div>
     </div>

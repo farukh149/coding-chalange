@@ -8,7 +8,7 @@
       <td class="align-middle"> 
     </table>
     <div>
-      <button id="create_request_btn_" class="btn btn-primary me-1"  onclick="sendRequest('{{auth()->user()->id}}','{{$user->id}}')">Connect</button>
+      <button id="create_request_btn_" class="btn btn-primary me-1"  onclick="sendRequest('{{auth()->user()->id}}','{{$user->id}}','pending')">Connect</button>
     </div>
   </div>
 </div>

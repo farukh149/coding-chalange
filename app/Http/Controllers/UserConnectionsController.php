@@ -23,20 +23,29 @@ class UserConnectionsController extends Controller
      */
     public function index(Request $request) 
     {
-        if($request->type == 'sentConnections'){
-            $type = 'sent';
-            $sentConnection = $this->userservice->sentConnection();
-            return view('blades.request',compact('sentConnection','type'))->render();
-        }
-        else if($request->type == 'recievedConnections'){
-            $type = 'recieved';
-            $recievedConnections = $this->userservice->recievedConnections();
-            return view('blades.request',compact('recievedConnections','type'))->render();
-        }
-        else {
-            $users = $this->userservice->getAllUsers();
-            return view('home',compact('users'))->render();
-        }
+        try { 
+                if($request->type == 'sentConnections'){
+                    $type = 'sent';
+                    $sentConnection = $this->userservice->sentConnection();
+                    return view('blades.request',compact('sentConnection','type'))->render();
+                }
+                else if($request->type == 'recievedConnections'){
+                    $type = 'recieved';
+                    $recievedConnections = $this->userservice->recievedConnections();
+                    return view('blades.request',compact('recievedConnections','type'))->render();
+                }
+                else if($request->type == 'acceptedConnections'){
+                    $type = 'acceptedConnections';
+                    $acceptedConnections = $this->userservice->getacceptedConnection();
+                    return view('blades.connection',compact('acceptedConnections','type'))->render();
+                }
+                else {
+                    $users = $this->userservice->getAllUsers();
+                    return view('home',compact('users'))->render();
+                }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }    
     }
 
     /**
@@ -57,7 +66,14 @@ class UserConnectionsController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->userservice->createConnection($request->userId,$request->suggestionId);
+        //try {
+             if($request->mode == 'accepted'){
+                 return $this->userservice->acceptConnection($request->userId,$request->requestId,$request->mode);
+             }
+             return $this->userservice->createConnection($request->userId,$request->suggestionId,$request->mode);
+        // } catch (\Exception$e) {
+        //     return $e->getMessage();
+        // }     
     }
 
     /**
@@ -102,6 +118,10 @@ class UserConnectionsController extends Controller
      */
     public function destroy(Request $request)
     {
-        return $this->userservice->deleteConnection($request->userId,$request->requestId);
+        try {
+             return $this->userservice->deleteConnection($request->userId,$request->requestId);
+        } catch (\Exception$e) {
+            return $e->getMessage();
+        } 
     }
 }
